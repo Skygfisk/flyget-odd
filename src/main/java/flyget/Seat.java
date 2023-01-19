@@ -1,6 +1,8 @@
 package flyget;
 
-public class Seat {
+import java.io.Serializable;
+
+public class Seat implements Serializable {
     private int rowNumber;
     private char seatChar;
     private boolean booked;
@@ -13,7 +15,11 @@ public class Seat {
         return this.seatChar;
     }
 
-    public boolean isBooked() {
+    public void setBooked(boolean x) {
+        this.booked = x;
+    }
+
+    public boolean getBooked() {
         return this.booked;
     }
 }
