@@ -1,6 +1,8 @@
 package flyget;
 
-public class Plane {
+import java.io.Serializable;
+
+public class Plane implements Serializable {
     private String name;
     private Seat[][] seats;
 
@@ -16,6 +18,10 @@ public class Plane {
             }
         }
         return newSeats;
+    }
+
+    public void bookSeat(int row, int seat) {
+        this.seats[row][seat].setBooked(true);
     }
 
     public Seat[][] getSeats() {
