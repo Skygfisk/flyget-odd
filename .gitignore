@@ -4,6 +4,10 @@
 # Maven generated folders
 target/ 
 
+# VS Code files
+.vscode
+Test.java
+
 # Log file
 *.log
 
