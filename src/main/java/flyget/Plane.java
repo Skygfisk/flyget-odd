@@ -21,8 +21,13 @@ public class Plane implements Serializable {
         return newSeats;
     }
 
-    public void bookSeat(int row, int seat) {
-        this.seats[row][seat].setBooked(true);
+    public boolean bookSeat(int row, int seat) {
+        if (this.seats[row][seat].getBooked()) {
+            return false;
+        } else {
+            this.seats[row][seat].setBooked(true);
+            return true;
+        }
     }
 
     public void printPlane() {
@@ -50,5 +55,9 @@ public class Plane implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public int getSize() {
+        return this.seats.length;
     }
 }
