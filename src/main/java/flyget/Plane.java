@@ -49,6 +49,14 @@ public class Plane implements Serializable {
         }
     }
 
+    public static int seatLetterToIndex(String s) {
+        return Plane.acb.indexOf(s.toUpperCase());
+    }
+
+    public static String seatIndexToLetter(int x) {
+        return Plane.acb.substring(x, x + 1);
+    }
+
     public Seat[][] getSeats() {
         return seats;
     }

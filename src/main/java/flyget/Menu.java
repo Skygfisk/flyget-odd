@@ -6,33 +6,49 @@ import java.util.Scanner;
 public class Menu {
     public static Scanner sc = new Scanner(System.in);
 
-    public static String getSeatFromUser() {
-        String str;
-        System.out.print("Enter seat to book: ");
-        String[] strArr = sc.nextLine().trim().split("\\s");
-        if (strArr.length > 1) {
-            str = strArr[0] + strArr[strArr.length - 1];
-        } else {
-            str = strArr[0];
+    private static int[] getSeatFromUser() {
+        while (true) {
+            try {
+                System.out.print("Enter seat to book: ");
+                String[] input = sc.nextLine().trim().split("\s");
+                int row = Integer.parseInt(input[0]) - 1;
+                int seat = Plane.seatLetterToIndex(input[1]);
+                return new int[] { row, seat };
+            } catch (Exception e) {
+                System.out.println("Invalid Seat");
+                continue;
+            }
+
         }
-        return str;
+
     }
 
     public static Person getPersonFromUser() {
         String[] strArr = getFullNameFromUser();
         LocalDate birthDate = getBirDateFromUser();
-        Person person = new Person(strArr[0], strArr[1], birthDate);
+        Person person = new Person(strArr[0], strArr[strArr.length - 1], birthDate);
         System.out.println(person.getFirstName() + '\n' + person.getLastName() + '\n' + person.getBirthDate());
         return person;
     }
 
     private static String[] getFullNameFromUser() {
-        System.out.print("Enter full name: ");
-        String[] strArr = sc.nextLine().trim().split("\\s");
-        return strArr;
+        while (true) {
+            try {
+                System.out.print("Enter full name: ");
+                String[] strArr = sc.nextLine().trim().split("\\s");
+                if (strArr.length < 2) {
+                    throw new Exception();
+                }
+                return strArr;
+            } catch (Exception e) {
+                System.out.println("Invalit input");
+                continue;
+            }
+
+        }
     }
 
-    public static LocalDate getBirDateFromUser() {
+    private static LocalDate getBirDateFromUser() {
         while (true) {
             try {
                 System.out.print("Enter birthdate (yyyy/mm/dd): ");
@@ -52,18 +68,20 @@ public class Menu {
 
     public static void bookSeatOnPlane(Plane plane) {
         while (true) {
-            String input = Menu.getSeatFromUser();
-            int row = Integer.parseInt(input.substring(0, 1)) - 1;
-            int seat = Plane.acb.indexOf(input.toUpperCase().charAt(1));
-            if (row >= plane.getSize() || seat >= plane.getSize()) {
-                System.out.println("Seat dosen't exist on plane");
+            try {
+                int[] input = Menu.getSeatFromUser();
+                int row = input[0];
+                int seat = input[1];
+                if (plane.bookSeat(row, seat)) {
+                    System.out.println(
+                            String.format("Seat: %s %S is now booked", row + 1, Plane.seatIndexToLetter(seat)));
+                    break;
+                }
+                System.out.println("Seat is already booked");
+            } catch (Exception e) {
+                System.out.println("Seat dosen't exist on this plane");
                 continue;
             }
-            if (plane.bookSeat(row, seat)) {
-                System.out.println("Seat: " + input + " is now booked");
-                break;
-            }
-            System.out.println("Seat is already booked");
         }
     }
 
