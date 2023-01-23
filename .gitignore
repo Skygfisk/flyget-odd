@@ -7,6 +7,8 @@ target/
 # VS Code files
 .vscode
 Test.java
+UnicodeTest.java
+*.dat
 
 # Log file
 *.log
