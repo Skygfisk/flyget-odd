@@ -53,6 +53,17 @@ public class Plane implements Serializable {
         }
     }
 
+    public void listPassengers() {
+        for (Seat[] row : this.seats) {
+            for (Seat seat : row) {
+                Person passenger = seat.getPassenger();
+                if (passenger != null) {
+                    System.out.println(passenger.getFullName() + " " + passenger.getBirthDate());
+                }
+            }
+        }
+    }
+
     public static int seatLetterToIndex(String s) {
         return Plane.acb.indexOf(s.toUpperCase());
     }
