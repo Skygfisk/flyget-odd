@@ -1,8 +1,9 @@
 package flyget;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Person {
+public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
@@ -19,6 +20,10 @@ public class Person {
 
     public String getLastName() {
         return this.lastName;
+    }
+
+    public String getFullName() {
+        return this.firstName + ' ' + this.lastName;
     }
 
     public LocalDate getBirthDate() {

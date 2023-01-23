@@ -21,13 +21,17 @@ public class Plane implements Serializable {
         return newSeats;
     }
 
-    public boolean bookSeat(int row, int seat) {
+    public boolean bookSeat(int row, int seat, Person passenger) {
         if (this.seats[row][seat].getBooked()) {
             return false;
         } else {
-            this.seats[row][seat].setBooked(true);
+            this.seats[row][seat].book(passenger);
             return true;
         }
+    }
+
+    public boolean isSeatBooked(int row, int seat) {
+        return this.seats[row][seat].getBooked();
     }
 
     public void printPlane() {

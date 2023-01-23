@@ -6,6 +6,7 @@ public class Seat implements Serializable {
     private int rowNumber;
     private char seatChar;
     private boolean booked;
+    private Person passenger;
 
     public int getRow() {
         return this.rowNumber;
@@ -21,5 +22,18 @@ public class Seat implements Serializable {
 
     public boolean getBooked() {
         return this.booked;
+    }
+
+    public void setPassenger(Person passenger) {
+        this.passenger = passenger;
+    }
+
+    public Person getPassenger() {
+        return passenger;
+    }
+
+    public void book(Person passenger) {
+        this.booked = true;
+        this.passenger = passenger;
     }
 }

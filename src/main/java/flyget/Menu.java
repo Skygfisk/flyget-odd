@@ -41,7 +41,7 @@ public class Menu {
                 }
                 return strArr;
             } catch (Exception e) {
-                System.out.println("Invalit input");
+                System.out.println("Invalit name");
                 continue;
             }
 
@@ -72,7 +72,9 @@ public class Menu {
                 int[] input = Menu.getSeatFromUser();
                 int row = input[0];
                 int seat = input[1];
-                if (plane.bookSeat(row, seat)) {
+                if (!plane.isSeatBooked(row, seat)) {
+                    Person user = getPersonFromUser();
+                    plane.bookSeat(row, seat, user);
                     System.out.println(
                             String.format("Seat: %s %S is now booked", row + 1, Plane.seatIndexToLetter(seat)));
                     break;
