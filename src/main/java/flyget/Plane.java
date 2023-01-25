@@ -64,15 +64,17 @@ public class Plane implements Serializable {
         return seatMap;
     }
 
-    public void listPassengers() {
+    public String listPassengers() {
+        String passengerList = "";
         for (Seat[] row : this.seats) {
             for (Seat seat : row) {
                 Person passenger = seat.getPassenger();
                 if (passenger != null) {
-                    System.out.println(passenger.getFullName() + " " + passenger.getBirthDate());
+                    passengerList = passengerList + passenger.getFullName() + " " + passenger.getBirthDate();
                 }
             }
         }
+        return passengerList;
     }
 
     public static int seatLetterToIndex(String s) {
