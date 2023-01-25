@@ -70,11 +70,19 @@ public class Plane implements Serializable {
             for (Seat seat : row) {
                 Person passenger = seat.getPassenger();
                 if (passenger != null) {
-                    passengerList = passengerList + passenger.getFullName() + " " + passenger.getBirthDate();
+                    passengerList = passengerList + normalizRowLenght(passenger);
                 }
             }
         }
         return passengerList;
+    }
+
+    private static String normalizRowLenght(Person p) {
+        String str = "                    ";
+        String name = p.getFullName();
+        String birthDate = p.getBirthDate().toString();
+        str = name + str.substring(name.length()) + birthDate + "\n";
+        return str;
     }
 
     public static int seatLetterToIndex(String s) {
