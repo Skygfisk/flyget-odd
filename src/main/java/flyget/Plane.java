@@ -3,9 +3,13 @@ package flyget;
 import java.io.Serializable;
 
 public class Plane implements Serializable {
-    private String name;
-    private Seat[][] seats;
-    public static final String acb = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    protected String name;
+    protected Seat[][] seats;
+    protected static final String acb = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    public Plane() {
+
+    }
 
     public Plane(int size) {
         this.seats = generateSeats(size);
@@ -34,23 +38,30 @@ public class Plane implements Serializable {
         return this.seats[row][seat].getBooked();
     }
 
-    public void printPlane() {
+    public boolean isSeatDead(int row, int seat) {
+        return this.seats[row][seat] instanceof DeadSeat;
+    }
+
+    public String getSeatMap() {
         int rowIndex = 1;
-        char[] seatIndex = Plane.acb.substring(0, this.seats.length).toCharArray();
-        String str = "   ";
+        char[] seatIndex = Plane.acb.substring(0, this.seats[0].length).toCharArray();
+        String seatMap = "    ";
         for (char c : seatIndex) {
-            str = str + c + "  ";
+            seatMap = seatMap + c + "  ";
         }
-        System.out.println(str);
+        seatMap = seatMap + '\n';
 
         for (Seat[] row : this.seats) {
-            System.out.print(rowIndex++ + " ");
-            for (Seat seat : row) {
-                char c = ((seat.getBooked()) ? 'X' : ' ');
-                System.out.print("[" + c + "]");
+            if (rowIndex < 10) {
+                seatMap = seatMap + " ";
             }
-            System.out.println();
+            seatMap = seatMap + rowIndex++ + " ";
+            for (Seat seat : row) {
+                seatMap = seatMap + seat.toString();
+            }
+            seatMap = seatMap + '\n';
         }
+        return seatMap;
     }
 
     public void listPassengers() {

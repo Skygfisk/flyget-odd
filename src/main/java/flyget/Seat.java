@@ -36,4 +36,8 @@ public class Seat implements Serializable {
         this.booked = true;
         this.passenger = passenger;
     }
+
+    public String toString() {
+        return this.booked ? "[X]" : "[ ]";
+    }
 }
