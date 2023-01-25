@@ -72,6 +72,9 @@ public class Menu {
                 int[] input = Menu.getSeatFromUser();
                 int row = input[0];
                 int seat = input[1];
+                if (plane.isSeatDead(row, seat)) {
+                    throw new Exception();
+                }
                 if (!plane.isSeatBooked(row, seat)) {
                     Person user = getPersonFromUser();
                     plane.bookSeat(row, seat, user);
