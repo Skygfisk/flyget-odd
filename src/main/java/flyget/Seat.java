@@ -2,6 +2,10 @@ package flyget;
 
 import java.io.Serializable;
 
+/**
+ * Represents a seat in a plane
+ * can be unbooked or booked by a Person
+ */
 public class Seat implements Serializable {
     private boolean booked;
     private Person passenger;
@@ -23,6 +27,12 @@ public class Seat implements Serializable {
         return passenger;
     }
 
+    /**
+     * Returns a visual representation of the
+     * seats booking status
+     * 
+     * @param booking status as a String
+     */
     public String toString() {
         return this.booked ? "[X]" : "[ ]";
     }

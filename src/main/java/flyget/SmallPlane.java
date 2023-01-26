@@ -1,5 +1,8 @@
 package flyget;
 
+/**
+ * Sub class of Plane with a specific Seat layout
+ */
 public class SmallPlane extends Plane {
 
     private static int ROW_MAX = 10;
@@ -21,6 +24,7 @@ public class SmallPlane extends Plane {
         return newSeats;
     }
 
+    @Override
     public String getSeatMap() {
         int rowIndex = 1;
         int seatIndex = 1;
