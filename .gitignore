@@ -1,6 +1,15 @@
 # Compiled class file
 *.class
 
+# Maven generated folders
+target/ 
+
+# VS Code files
+.vscode
+Test.java
+UnicodeTest.java
+*.dat
+
 # Log file
 *.log
 
