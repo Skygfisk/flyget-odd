@@ -14,7 +14,7 @@ public class Menu {
             4: List passenger
             """;
 
-    private static int[] getSeatFromUser() {
+    public static int[] getSeatFromUser() {
         while (true) {
             try {
                 System.out.print("Enter seat to book: ");
@@ -39,7 +39,7 @@ public class Menu {
         return person;
     }
 
-    private static String[] getFullNameFromUser() {
+    public static String[] getFullNameFromUser() {
         while (true) {
             try {
                 System.out.print("Enter full name: ");
@@ -49,14 +49,14 @@ public class Menu {
                 }
                 return strArr;
             } catch (Exception e) {
-                System.out.println("Invalit name");
+                System.out.println("Invalid name");
                 continue;
             }
 
         }
     }
 
-    private static LocalDate getBirDateFromUser() {
+    public static LocalDate getBirDateFromUser() {
         while (true) {
             try {
                 System.out.print("Enter birthdate (yyyy/mm/dd): ");
