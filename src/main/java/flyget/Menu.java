@@ -1,10 +1,18 @@
 package flyget;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
     public static Scanner sc = new Scanner(System.in);
+    public static Plane plane;
+    public static String MENU_ART = """
+            1: Creat Plane
+            2: Load Plane
+            3: Book Seat
+            4: List passenger
+            """;
 
     private static int[] getSeatFromUser() {
         while (true) {
@@ -72,9 +80,6 @@ public class Menu {
                 int[] input = Menu.getSeatFromUser();
                 int row = input[0];
                 int seat = input[1];
-                if (plane.isSeatDead(row, seat)) {
-                    throw new Exception();
-                }
                 if (!plane.isSeatBooked(row, seat)) {
                     Person user = getPersonFromUser();
                     plane.bookSeat(row, seat, user);
@@ -90,7 +95,48 @@ public class Menu {
         }
     }
 
-    public static void main(String[] args) {
+    static void menu_choices(int i) throws IOException, ClassNotFoundException {
+        switch (i) {
+            case 1:
+                System.out.println("Generating new Plane");
+                plane = new SmallPlane();
+                break;
+            case 2:
+                System.out.println("Load Plane from file");
+                System.out.println("TODO");
+                // App.mainHotel = (MyHotel) Writer.readFromFile(file);
+                break;
+            case 3:
+                if (plane != null) {
+                    bookSeatOnPlane(plane);
+                }
+                break;
+            case 4:
+                if (plane != null) {
+                    System.out.println(plane.listPassengers());
+                }
+                break;
+            default:
+                System.out.println("Unknown selection");
+        }
+    }
 
+    public static void main(String[] args) {
+        try {
+            while (true) {
+                System.out.println(MENU_ART);
+                System.out.print("Enter a int 1-4 to choice or 'exit' to quit: ");
+                if (sc.hasNextInt()) {
+                    int choice = Integer.valueOf(sc.nextLine());
+                    menu_choices(choice);
+                } else {
+                    if (sc.nextLine().equals("exit")) {
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        }
     }
 }

@@ -34,12 +34,11 @@ public class Plane implements Serializable {
         }
     }
 
-    public boolean isSeatBooked(int row, int seat) {
+    public boolean isSeatBooked(int row, int seat) throws Exception {
+        if (this.seats[row][seat] instanceof DeadSeat) {
+            throw new Exception();
+        }
         return this.seats[row][seat].getBooked();
-    }
-
-    public boolean isSeatDead(int row, int seat) {
-        return this.seats[row][seat] instanceof DeadSeat;
     }
 
     public String getSeatMap() {
@@ -90,7 +89,12 @@ public class Plane implements Serializable {
     }
 
     public static String seatIndexToLetter(int x) {
-        return Plane.acb.substring(x, x + 1);
+        int index = Math.abs(x);
+        try {
+            return Plane.acb.substring(index, index + 1);
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public Seat[][] getSeats() {
